@@ -1,4 +1,5 @@
 ﻿using BookStore.Domain.Common;
+using BookStore.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -138,8 +139,8 @@ namespace BookStore.Domain.ValueObjects
 
         private void SetIsbn(string isbn)
         {
-            if(!IsValid(isbn))
-                throw new Exception("invalid ISBN");
+            if (!IsValid(isbn))
+                throw new InvalidISBNException(isbn);
 
             isbn = CleanIsbn(isbn);
             if (isbn.Length == 10)
