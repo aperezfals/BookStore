@@ -30,7 +30,7 @@ namespace BookStore.WebApi.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Post(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteBookCommand() { Id = id });
             return NoContent();
