@@ -26,7 +26,9 @@ namespace BookStore.Application.Books.Queries.GetBooksList
 
             public async Task<BooksListVM> Handle(GetBooksListQuery request, CancellationToken cancellationToken)
             {
-                var books = await db.Books.Include("Author")
+                var books = await db.Books
+                    .AsNoTracking()
+                    .Include("Author")
                     .ProjectTo<BookLookupDTO>(mapper.ConfigurationProvider)
                     .ToListAsync();
 

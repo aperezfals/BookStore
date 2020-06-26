@@ -26,7 +26,9 @@ namespace BookStore.Application.Books.Queries.GetBookDetail
 
             public async Task<BookDetailVM> Handle(GetBookDetailQuery request, CancellationToken cancellationToken)
             {
-                var entity = await db.Books.Include("Author")
+                var entity = await db.Books
+                    .AsNoTracking()
+                    .Include("Author")
                     .FirstOrDefaultAsync(book => book.Id == request.Id, cancellationToken);
 
                 if (entity == null)

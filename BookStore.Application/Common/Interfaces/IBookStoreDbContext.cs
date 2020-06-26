@@ -1,5 +1,7 @@
 ﻿using BookStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BookStore.Application.Common.Interfaces
 {
@@ -12,5 +14,7 @@ namespace BookStore.Application.Common.Interfaces
         DbSet<Author> Authors { get; set; }
 
         DbSet<Order> Orders { get; set; }
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

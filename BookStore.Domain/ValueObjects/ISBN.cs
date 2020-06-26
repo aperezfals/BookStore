@@ -29,7 +29,7 @@ namespace BookStore.Domain.ValueObjects
             return isbn.ToString();
         }
 
-        public static explicit operator ISBN(string isbn)
+        public static implicit operator ISBN(string isbn)
         {
             return For(isbn);
         }
