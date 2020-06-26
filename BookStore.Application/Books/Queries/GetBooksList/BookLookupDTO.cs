@@ -13,8 +13,6 @@ namespace BookStore.Application.Books.Queries.GetBooksList
 
         public AuthorDTO Author { get; set; }
 
-        public string AuthorName { get; set; }
-
         public string ISBN { get; set; }
 
         public void Mapping(Profile profile)

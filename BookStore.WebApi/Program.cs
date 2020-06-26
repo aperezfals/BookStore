@@ -8,12 +8,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using BookStore.Persistence;
+using MediatR;
+using BookStore.Application.System.Commands.SeedSampleData;
 
 namespace BookStore.WebApi
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
@@ -24,7 +26,10 @@ namespace BookStore.WebApi
                 try
                 {
                     var bookStoreDbContext = services.GetRequiredService<BookStoreDbContext>();
-                    bookStoreDbContext.Database.EnsureCreated();
+                    await bookStoreDbContext.Database.EnsureCreatedAsync();
+
+                    var mediator = services.GetRequiredService<IMediator>();
+                    await mediator.Send(new SeedSampleDataCommand());
                 }
                 catch (Exception ex)
                 {

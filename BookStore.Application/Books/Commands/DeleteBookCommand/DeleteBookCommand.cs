@@ -2,8 +2,10 @@
 using BookStore.Application.Common.Interfaces;
 using BookStore.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +27,7 @@ namespace BookStore.Application.Books.Commands.DeleteBookCommand
 
             public async Task<Unit> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
             {
-                var entity = await db.Books.FindAsync(request.Id, cancellationToken);
+                var entity = await db.Books.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
                 if (entity == null)
                     throw new NotFoundException(nameof(Book), request.Id);
 

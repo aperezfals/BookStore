@@ -6,6 +6,7 @@ using BookStore.Application;
 using BookStore.Application.Common.Interfaces;
 using BookStore.Infrastructure;
 using BookStore.Persistence;
+using BookStore.WebApi.Common;
 using BookStore.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -61,13 +62,10 @@ namespace BookStore.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
-
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

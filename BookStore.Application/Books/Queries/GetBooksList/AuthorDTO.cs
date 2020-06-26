@@ -11,7 +11,7 @@ namespace BookStore.Application.Books.Queries.GetBooksList
     {
         public int Id { get; set; }
 
-        public int Name { get; set; }
+        public string FullName { get; set; }
 
         public void Mapping(Profile profile)
         {

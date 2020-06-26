@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace BookStore.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public abstract class BaseController : ControllerBase
     {
         private IMediator mediator;

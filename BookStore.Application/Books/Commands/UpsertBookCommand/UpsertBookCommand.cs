@@ -3,6 +3,7 @@ using BookStore.Application.Common.Exceptions;
 using BookStore.Application.Common.Interfaces;
 using BookStore.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace BookStore.Application.Books.Commands.UpsertBookCommand
 
                 if (request.Id.HasValue)
                 {
-                    entity = await db.Books.FindAsync(request.Id.Value, cancellationToken);
+                    entity = await db.Books.FirstOrDefaultAsync(x => x.Id == request.Id.Value, cancellationToken);
                     if(entity == null)
                     {
                         throw new NotFoundException(nameof(Book), request.Id.Value);
