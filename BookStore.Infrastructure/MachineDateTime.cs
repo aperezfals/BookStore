@@ -1,7 +1,7 @@
 ﻿using BookStore.Common;
 using System;
 
-namespace Infrastructure
+namespace BookStore.Infrastructure
 {
     public class MachineDateTime : IDateTime
     {

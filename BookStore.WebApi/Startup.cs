@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStore.Application;
+using BookStore.Infrastructure;
+using BookStore.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,10 @@ namespace BookStore.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddInfrastructure();
+            services.AddPersistence(Configuration);
+            services.AddApplication();
+
             services.AddControllers();
         }
 
@@ -37,6 +44,14 @@ namespace BookStore.WebApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseOpenApi();
+
+            app.UseSwaggerUi3(settings =>
+            {
+                settings.Path = "/api";
+                //    settings.DocumentPath = "/api/specification.json";   Enable when NSwag.MSBuild is upgraded to .NET Core 3.0
+            });
 
             app.UseRouting();
 
