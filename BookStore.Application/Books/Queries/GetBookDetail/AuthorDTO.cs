@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AutoMapper;
+using BookStore.Application.Common.Mappings;
+using BookStore.Domain.Entities;
 
 namespace BookStore.Application.Books.Queries.GetBookDetail
 {
-    public class AuthorDTO
+    public class AuthorDTO : IMapFrom
     {
         public int Id { get; set; }
 
         public int Name { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Author, AuthorDTO>();
+        }
     }
 }
