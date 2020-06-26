@@ -74,6 +74,9 @@ namespace BookStore.Domain.ValueObjects
 
         private static bool IsValid(string isbn, out string correctISBN)
         {
+            if (string.IsNullOrWhiteSpace(isbn))
+                throw new InvalidISBNException("");
+
             // remove - and space
             isbn = CleanIsbn(isbn);
             if (isbn.Length == 10)
