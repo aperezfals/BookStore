@@ -17,5 +17,7 @@ namespace BookStore.Domain.Entities
         public Author Author { get; set; }
 
         public ISBN ISBN { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }

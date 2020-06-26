@@ -5,13 +5,17 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D63451ED-6AA8-46E8-AB4E-7445F757366C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Domain", "BookStore.Domain\BookStore.Domain.csproj", "{279B651D-67EB-443D-974B-DB46884535A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Domain", "BookStore.Domain\BookStore.Domain.csproj", "{279B651D-67EB-443D-974B-DB46884535A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Application", "BookStore.Application\BookStore.Application.csproj", "{8185B67F-ECC1-44F3-AC4D-B14B8923DD21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Application", "BookStore.Application\BookStore.Application.csproj", "{8185B67F-ECC1-44F3-AC4D-B14B8923DD21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Infrastructure", "BookStore.Infrastructure\BookStore.Infrastructure.csproj", "{67721018-9A33-4D44-A206-F5362899A8EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Infrastructure", "BookStore.Infrastructure\BookStore.Infrastructure.csproj", "{67721018-9A33-4D44-A206-F5362899A8EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.WebApi", "BookStore.WebApi\BookStore.WebApi.csproj", "{A25FF0CC-71E2-4A01-A8C4-88FDBCE10614}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.WebApi", "BookStore.WebApi\BookStore.WebApi.csproj", "{A25FF0CC-71E2-4A01-A8C4-88FDBCE10614}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Persistence", "BookStore.Persistence\BookStore.Persistence.csproj", "{3F3A0B64-ABC4-4628-A6C3-2F6312622F72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Common", "BookStore.Common\BookStore.Common.csproj", "{840774F9-BF38-4C92-B0E7-3F13795B472C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,14 @@ Global
 		{A25FF0CC-71E2-4A01-A8C4-88FDBCE10614}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A25FF0CC-71E2-4A01-A8C4-88FDBCE10614}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A25FF0CC-71E2-4A01-A8C4-88FDBCE10614}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F3A0B64-ABC4-4628-A6C3-2F6312622F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F3A0B64-ABC4-4628-A6C3-2F6312622F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F3A0B64-ABC4-4628-A6C3-2F6312622F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F3A0B64-ABC4-4628-A6C3-2F6312622F72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{840774F9-BF38-4C92-B0E7-3F13795B472C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{840774F9-BF38-4C92-B0E7-3F13795B472C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{840774F9-BF38-4C92-B0E7-3F13795B472C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{840774F9-BF38-4C92-B0E7-3F13795B472C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +56,7 @@ Global
 		{8185B67F-ECC1-44F3-AC4D-B14B8923DD21} = {D63451ED-6AA8-46E8-AB4E-7445F757366C}
 		{67721018-9A33-4D44-A206-F5362899A8EF} = {D63451ED-6AA8-46E8-AB4E-7445F757366C}
 		{A25FF0CC-71E2-4A01-A8C4-88FDBCE10614} = {D63451ED-6AA8-46E8-AB4E-7445F757366C}
+		{840774F9-BF38-4C92-B0E7-3F13795B472C} = {D63451ED-6AA8-46E8-AB4E-7445F757366C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08D2D3E4-EFDF-4A65-B44A-9B532DB612DB}
