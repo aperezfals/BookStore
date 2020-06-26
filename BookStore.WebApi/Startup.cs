@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookStore.Application;
+using BookStore.Application.Common.Interfaces;
 using BookStore.Infrastructure;
 using BookStore.Persistence;
+using BookStore.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace BookStore.WebApi
 {
@@ -32,12 +35,27 @@ namespace BookStore.WebApi
             services.AddPersistence(Configuration);
             services.AddApplication();
 
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -45,13 +63,6 @@ namespace BookStore.WebApi
 
             app.UseHttpsRedirection();
 
-            app.UseOpenApi();
-
-            app.UseSwaggerUi3(settings =>
-            {
-                settings.Path = "/api";
-                //    settings.DocumentPath = "/api/specification.json";   Enable when NSwag.MSBuild is upgraded to .NET Core 3.0
-            });
 
             app.UseRouting();
 
@@ -59,6 +70,9 @@ namespace BookStore.WebApi
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
         }

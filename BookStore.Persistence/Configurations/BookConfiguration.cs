@@ -1,4 +1,5 @@
 ﻿using BookStore.Domain.Entities;
+using BookStore.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +12,9 @@ namespace BookStore.Persistence.Configurations
             builder.Property(x => x.ISBN)
                 .HasMaxLength(13)
                 .IsRequired()
-                .HasConversion(typeof(string));
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (ISBN)v);
 
             builder.Property(x => x.Name)
                 .HasMaxLength(200)
