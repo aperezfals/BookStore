@@ -31,14 +31,19 @@ namespace BookStore.Application.Books.Commands.DeleteBook
                 if (entity == null)
                     throw new NotFoundException(nameof(Book), request.Id);
 
-                bool hasOrders = await db.Orders.AnyAsync(order => order.ClientId == request.Id, cancellationToken);
-                if (hasOrders)
-                    throw new DeleteFailureException(nameof(Book), request.Id, "There are exisitng orders associated with this book.");
+                await ValidateOrders(request.Id, cancellationToken);
 
                 db.Books.Remove(entity);
                 await db.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
+            }
+
+            private async Task ValidateOrders(int bookId, CancellationToken cancellationToken)
+            {
+                bool hasOrders = await db.Orders.AnyAsync(order => order.ClientId == bookId, cancellationToken);
+                if (hasOrders)
+                    throw new DeleteFailureException(nameof(Book), bookId, "There are exisitng orders associated with this book.");
             }
         }
     }
