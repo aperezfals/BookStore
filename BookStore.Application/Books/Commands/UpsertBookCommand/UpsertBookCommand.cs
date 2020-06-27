@@ -37,9 +37,7 @@ namespace BookStore.Application.Books.Commands.UpsertBookCommand
                 {
                     entity = await db.Books.FirstOrDefaultAsync(x => x.Id == request.Id.Value, cancellationToken);
                     if(entity == null)
-                    {
                         throw new NotFoundException(nameof(Book), request.Id.Value);
-                    }
                 }
                 else
                 {
