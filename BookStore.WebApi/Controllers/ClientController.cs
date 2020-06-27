@@ -1,4 +1,5 @@
 ﻿using BookStore.Application.Clients.Commands.UpsertClient;
+using BookStore.Application.Clients.Queries.GetClientDetail;
 using BookStore.Application.Clients.Queries.GetClientsListQuery;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,13 @@ namespace BookStore.WebApi.Controllers
         public async Task<ActionResult<ClientsListVM>> GetAll()
         {
             return await Mediator.Send(new GetClientsListQuery());
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<ClientDetailVM>> Get(int id)
+        {
+            return await Mediator.Send(new GetClientDetailQuery() { Id = id });
         }
 
         [HttpPost]
