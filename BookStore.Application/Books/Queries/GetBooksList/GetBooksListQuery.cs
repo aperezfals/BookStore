@@ -3,9 +3,6 @@ using AutoMapper.QueryableExtensions;
 using BookStore.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,7 +27,7 @@ namespace BookStore.Application.Books.Queries.GetBooksList
                     .AsNoTracking()
                     .Include("Author")
                     .ProjectTo<BookLookupDTO>(mapper.ConfigurationProvider)
-                    .ToListAsync();
+                    .ToListAsync(cancellationToken);
 
                 return new BooksListVM() { Books = books };
             }
