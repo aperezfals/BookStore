@@ -45,6 +45,8 @@ namespace BookStore.Application.Books.Commands.UpsertBook
                     db.Books.Add(entity);
                 }
 
+                await ValidateAuthor(request, cancellationToken);
+
                 entity.AuthorId = request.AuthorId;
                 entity.ISBN = request.ISBN;
                 entity.Name = request.Name;
@@ -52,6 +54,13 @@ namespace BookStore.Application.Books.Commands.UpsertBook
                 await db.SaveChangesAsync(cancellationToken);
 
                 return entity.Id;
+            }
+
+            private async Task ValidateAuthor(UpsertBookCommand request, CancellationToken cancellationToken)
+            {
+                bool existAuthor = await db.Authors.AnyAsync(author => author.Id == request.AuthorId, cancellationToken);
+                if (!existAuthor)
+                    throw new NotFoundException(nameof(Author), request.AuthorId);
             }
         }
     }
