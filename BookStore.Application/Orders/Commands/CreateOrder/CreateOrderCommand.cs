@@ -1,6 +1,8 @@
-﻿using BookStore.Application.Common.Interfaces;
+﻿using BookStore.Application.Common.Exceptions;
+using BookStore.Application.Common.Interfaces;
 using BookStore.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,8 @@ namespace BookStore.Application.Orders.Commands.CreateOrder
 
             public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
             {
+                await ValidateBook(request.BookId, cancellationToken);
+
                 var entity = new Order()
                 {
                     BookId = request.BookId,
@@ -41,6 +45,20 @@ namespace BookStore.Application.Orders.Commands.CreateOrder
                 await db.SaveChangesAsync(cancellationToken);
 
                 return entity.Id;
+            }
+
+            private async Task ValidateBook(int bookId, CancellationToken cancellationToken)
+            {
+                bool existBook = await db.Books.AnyAsync(book => book.Id == bookId, cancellationToken);
+                if (!existBook)
+                    throw new NotFoundException(nameof(Book), bookId);
+            }
+
+            private async Task ValidateClient(int clientId, CancellationToken cancellationToken)
+            {
+                bool existClient = await db.Clients.AnyAsync(client => client.Id == clientId, cancellationToken);
+                if (!existClient)
+                    throw new NotFoundException(nameof(Client), clientId);
             }
         }
     }
