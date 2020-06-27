@@ -27,9 +27,13 @@ namespace BookStore.Application.Books.Commands.DeleteBook
 
             public async Task<Unit> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
             {
-                var entity = await db.Books.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+                var entity = await db.Books.FirstOrDefaultAsync(book => book.Id == request.Id, cancellationToken);
                 if (entity == null)
                     throw new NotFoundException(nameof(Book), request.Id);
+
+                bool hasOrders = await db.Orders.AnyAsync(order => order.ClientId == request.Id, cancellationToken);
+                if (hasOrders)
+                    throw new DeleteFailureException(nameof(Book), request.Id, "There are exisitng orders associated with this book.");
 
                 db.Books.Remove(entity);
                 await db.SaveChangesAsync(cancellationToken);
