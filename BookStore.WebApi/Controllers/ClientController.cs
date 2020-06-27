@@ -1,4 +1,5 @@
-﻿using BookStore.Application.Clients.Commands.UpsertClient;
+﻿using BookStore.Application.Clients.Commands.DeleteClient;
+using BookStore.Application.Clients.Commands.UpsertClient;
 using BookStore.Application.Clients.Queries.GetClientDetail;
 using BookStore.Application.Clients.Queries.GetClientsListQuery;
 using Microsoft.AspNetCore.Http;
@@ -33,5 +34,15 @@ namespace BookStore.WebApi.Controllers
             int id = await Mediator.Send(command);
             return Ok(id);
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeleteClientCommand() { Id = id });
+            return NoContent();
+        }
+
     }
 }
