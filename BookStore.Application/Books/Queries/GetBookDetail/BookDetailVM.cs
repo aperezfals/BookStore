@@ -14,10 +14,11 @@ namespace BookStore.Application.Books.Queries.GetBookDetail
 
         public string ISBN { get; set; }
 
+        public int OrdersAmmount { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Book, BookDetailVM>();
-                //.ForMember(x => x.ISBN, x => x.MapFrom(book => book.ISBN));
         }
     }
 }

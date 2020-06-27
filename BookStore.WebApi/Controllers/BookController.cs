@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookStore.Application.Books.Commands.DeleteBook;
 using BookStore.Application.Books.Commands.UpsertBook;
+using BookStore.Application.Books.Queries.GetBookDetail;
 using BookStore.Application.Books.Queries.GetBooksList;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,15 @@ namespace BookStore.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<BooksListVM>> GetAll()
         {
-            return await Mediator.Send(new GetBooksListQuery());
+            return Ok(await Mediator.Send(new GetBooksListQuery()));
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<BookDetailVM>> Get(int id)
+        {
+            return Ok(await Mediator.Send(new GetBookDetailQuery() { Id = id }));
         }
 
         [HttpPost]
