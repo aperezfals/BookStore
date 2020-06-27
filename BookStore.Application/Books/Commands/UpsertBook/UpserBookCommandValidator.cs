@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BookStore.Application.Books.Commands.UpsertBookCommand
+namespace BookStore.Application.Books.Commands.UpsertBook
 {
     public class UpserBookCommandValidator : AbstractValidator<UpsertBookCommand>
     {

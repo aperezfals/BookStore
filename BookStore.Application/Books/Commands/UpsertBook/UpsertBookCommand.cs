@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BookStore.Application.Books.Commands.UpsertBookCommand
+namespace BookStore.Application.Books.Commands.UpsertBook
 {
     public class UpsertBookCommand : IRequest<int>
     {

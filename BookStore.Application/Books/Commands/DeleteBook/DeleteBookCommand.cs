@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BookStore.Application.Books.Commands.DeleteBookCommand
+namespace BookStore.Application.Books.Commands.DeleteBook
 {
     public class DeleteBookCommand : IRequest
     {
