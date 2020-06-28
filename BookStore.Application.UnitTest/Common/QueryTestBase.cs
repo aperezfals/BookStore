@@ -5,12 +5,12 @@ using System;
 
 namespace BookStore.Application.UnitTest.Common
 {
-    public class QueryTestFixture : IDisposable
+    public class QueryTestBase : IDisposable
     {
         public BookStoreDbContext Context { get; private set; }
         public IMapper Mapper { get; private set; }
 
-        public QueryTestFixture()
+        public QueryTestBase()
         {
             Context = BookStoreContextFactory.Create();
 

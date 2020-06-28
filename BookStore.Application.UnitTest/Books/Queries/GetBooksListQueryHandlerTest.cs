@@ -8,7 +8,7 @@ using static BookStore.Application.Books.Queries.GetBooksList.GetBooksListQuery;
 namespace BookStore.Application.UnitTest.Books.Queries
 {
     [TestFixture]
-    public class GetBooksListQueryHandlerTest : QueryTestFixture
+    public class GetBooksListQueryHandlerTest : QueryTestBase
     {
         GetBooksListQueryHandler handler;
         
