@@ -98,7 +98,13 @@ namespace BookStore.Domain.ValueObjects
         {
             int sum = 0;
             for (int i = 0; i < 9; i++)
-                sum += (10 - i) * int.Parse(isbn[i].ToString());
+            {
+                int digit;
+                if (!int.TryParse(isbn[i].ToString(), out digit))
+                    throw new InvalidISBNException(isbn);
+
+                sum += (10 - i) * digit;
+            }
             
             float rem = sum % 11;
             
@@ -114,7 +120,12 @@ namespace BookStore.Domain.ValueObjects
         {
             float sum = 0;
             for (int i = 0; i < 12; i++)
-                sum += ((i % 2 == 0) ? 1 : 3) * int.Parse(isbn[i].ToString());
+            {
+                int digit;
+                if (!int.TryParse(isbn[i].ToString(), out digit))
+                    throw new InvalidISBNException(isbn);
+                sum += ((i % 2 == 0) ? 1 : 3) * digit;
+            }
             
             float rem = sum % 10;
             if (rem == 0)
