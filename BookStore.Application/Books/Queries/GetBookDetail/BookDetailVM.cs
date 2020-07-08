@@ -10,6 +10,8 @@ namespace BookStore.Application.Books.Queries.GetBookDetail
 
         public string Name { get; set; }
 
+        public int AuthorId { get; set; }
+
         public AuthorDTO Author { get; set; }
 
         public string ISBN { get; set; }

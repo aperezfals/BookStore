@@ -1,0 +1,50 @@
+<div>
+  <div>
+    <h2>Books List <button class="btn-primary btn" (click)="addBook()">+</button></h2>
+    
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          ISBN
+        </th>
+        <th>
+          Name
+        </th>
+
+        <th>
+          Author
+        </th>
+
+        <th>
+          
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>
+          {{book.isbn}}
+
+        </td>
+        <td>
+          <a href="#" (click)="selectBook(book)">{{book.name}}</a>
+        </td>
+        <td>
+          {{book.author.fullName}}
+        </td>
+
+        <td>
+          <button class="btn btn-danger" (click)="deleteBook(book)"> - </button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+<div  *ngIf="isEditMode">
+  <h2>Book Detail</h2>
+  <app-upsert-book [book]="selectedBook"></app-upsert-book>
+</div>

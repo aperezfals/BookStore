@@ -51,6 +51,7 @@ namespace BookStore.Application.Books.Queries.GetBookDetail
                                     FullName = bookGroup.Key.AuthorName
                                 },
                                 Name = bookGroup.Key.Name,
+                                AuthorId = bookGroup.Key.AuthorId,
                                 OrdersAmmount = bookGroup.Sum(x => x.order.Ammount)
                             };
 
